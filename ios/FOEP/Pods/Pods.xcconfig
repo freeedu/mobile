@@ -1,0 +1,7 @@
+CLANG_CXX_LANGUAGE_STANDARD = c++98
+CLANG_CXX_LIBRARY = libstdc++
+GCC_PREPROCESSOR_DEFINITIONS = $(inherited) COCOAPODS=1
+HEADER_SEARCH_PATHS = "${PODS_ROOT}/Headers" "${PODS_ROOT}/Headers/AFNetworking" "${PODS_ROOT}/Headers/AFOAuth2Client" "${PODS_ROOT}/Headers/JSONKit" "${PODS_ROOT}/Headers/ZXing" ${PODS_ROOT}/ZXing/cpp/core/src/ ${PODS_ROOT}/ZXing/iphone/ZXingWidget/Classes/**
+OTHER_CFLAGS = $(inherited) "-isystem${PODS_ROOT}/Headers" "-isystem${PODS_ROOT}/Headers/AFNetworking" "-isystem${PODS_ROOT}/Headers/AFOAuth2Client" "-isystem${PODS_ROOT}/Headers/JSONKit" "-isystem${PODS_ROOT}/Headers/ZXing"
+OTHER_LDFLAGS = -ObjC -liconv -lstdc++ -framework AVFoundation -framework AddressBook -framework AddressBookUI -framework AudioToolbox -framework CoreGraphics -framework CoreMedia -framework CoreVideo -framework ImageIO -framework MobileCoreServices -framework QuartzCore -framework Security -framework SystemConfiguration
+PODS_ROOT = ${SRCROOT}/Pods

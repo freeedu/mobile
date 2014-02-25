@@ -1,0 +1,4 @@
+PODS_ZXING_CLANG_CXX_LANGUAGE_STANDARD = c++98
+PODS_ZXING_CLANG_CXX_LIBRARY = libstdc++
+PODS_ZXING_HEADER_SEARCH_PATHS = ${PODS_ROOT}/ZXing/cpp/core/src/ ${PODS_ROOT}/ZXing/iphone/ZXingWidget/Classes/**
+PODS_ZXING_OTHER_LDFLAGS = -liconv -lstdc++ -framework AVFoundation -framework AddressBook -framework AddressBookUI -framework AudioToolbox -framework CoreGraphics -framework CoreMedia -framework CoreVideo -framework ImageIO -framework QuartzCore

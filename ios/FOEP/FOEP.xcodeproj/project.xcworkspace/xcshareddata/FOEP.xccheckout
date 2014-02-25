@@ -1,0 +1,41 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE plist PUBLIC "-//Apple//DTD PLIST 1.0//EN" "http://www.apple.com/DTDs/PropertyList-1.0.dtd">
+<plist version="1.0">
+<dict>
+	<key>IDESourceControlProjectFavoriteDictionaryKey</key>
+	<false/>
+	<key>IDESourceControlProjectIdentifier</key>
+	<string>688C49BB-9B6D-4DB5-84D4-300508807FC4</string>
+	<key>IDESourceControlProjectName</key>
+	<string>FOEP</string>
+	<key>IDESourceControlProjectOriginsDictionary</key>
+	<dict>
+		<key>719F3854-4ADE-4E60-BACC-6D065255015A</key>
+		<string>https://github.com/freeedu/mobile.git</string>
+	</dict>
+	<key>IDESourceControlProjectPath</key>
+	<string>ios/FOEP/FOEP.xcodeproj/project.xcworkspace</string>
+	<key>IDESourceControlProjectRelativeInstallPathDictionary</key>
+	<dict>
+		<key>719F3854-4ADE-4E60-BACC-6D065255015A</key>
+		<string>../../../..</string>
+	</dict>
+	<key>IDESourceControlProjectURL</key>
+	<string>https://github.com/freeedu/mobile.git</string>
+	<key>IDESourceControlProjectVersion</key>
+	<integer>110</integer>
+	<key>IDESourceControlProjectWCCIdentifier</key>
+	<string>719F3854-4ADE-4E60-BACC-6D065255015A</string>
+	<key>IDESourceControlProjectWCConfigurations</key>
+	<array>
+		<dict>
+			<key>IDESourceControlRepositoryExtensionIdentifierKey</key>
+			<string>public.vcs.git</string>
+			<key>IDESourceControlWCCIdentifierKey</key>
+			<string>719F3854-4ADE-4E60-BACC-6D065255015A</string>
+			<key>IDESourceControlWCCName</key>
+			<string>mobile</string>
+		</dict>
+	</array>
+</dict>
+</plist>
