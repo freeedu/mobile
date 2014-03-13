@@ -85,23 +85,17 @@
 }
 
 -(NSString *)phoneNumber{
-    ABMultiValueRef multiValue = ABRecordCopyValue(_record, kABPersonPhoneProperty);
-    
-    if (multiValue == nil || ABMultiValueGetCount(multiValue) == 0) {
-        return nil;
+    if([[self allPhones] count] > 0){
+        return [[self allPhones] objectAtIndex:0];
     }
-    
-    return (__bridge NSString*)ABMultiValueCopyValueAtIndex(multiValue, 0);
+    return @"";
 }
 
 - (NSString *)email {
-    ABMultiValueRef multiValue = ABRecordCopyValue(_record, kABPersonEmailProperty);
-    
-    if (multiValue == nil || ABMultiValueGetCount(multiValue) == 0) {
-        return nil;
+    if([[self allEmails] count] > 0){
+        return [[self allEmails] objectAtIndex:0];
     }
-    
-    return (__bridge NSString*)ABMultiValueCopyValueAtIndex(multiValue, 0);
+    return @"";
 }
 
 - (NSString*)firstLastSort {
@@ -183,24 +177,23 @@
             CFStringRef label = ABMultiValueCopyLabelAtIndex(multiValueRef, i);
             
             ABMMultiValue *multiValue = [[ABMMultiValue alloc] init];
-            [multiValue setLabel:(__bridge NSString *)(label)];
-            [multiValue setHumanReadableLabel:(__bridge NSString *)(ABAddressBookCopyLocalizedLabel(label))];
+            [multiValue setLabel:(__bridge_transfer NSString *)(label)];
+            [multiValue setHumanReadableLabel:(__bridge_transfer NSString *)(ABAddressBookCopyLocalizedLabel(label))];
             
             switch (valueType) {
                 case kABMValueTypeString:{
-                        CFStringRef stringValue  = ABMultiValueCopyValueAtIndex(multiValueRef, i);
-                        [multiValue setStringValue:(__bridge NSString *)(stringValue)];
-                        CFRelease(stringValue);
+                        CFStringRef stringValue  = (CFStringRef)ABMultiValueCopyValueAtIndex(multiValueRef, i);
+                        [multiValue setStringValue:(__bridge_transfer NSString *)(stringValue)];
                     }
                     break;
                 case kABMValueTypeDate:{
-                        CFDateRef dateValue = ABMultiValueCopyValueAtIndex(multiValueRef, i);
-                        [multiValue setDateValue:(__bridge NSDate *)(dateValue)];
+                        CFDateRef dateValue = (CFDateRef)ABMultiValueCopyValueAtIndex(multiValueRef, i);
+                        [multiValue setDateValue:(__bridge_transfer NSDate *)(dateValue)];
                     }
                     break;
                 case kABMValueTypeDictionary:{
                     
-                        NSDictionary *dictionary = (__bridge NSDictionary *)(ABMultiValueCopyValueAtIndex(multiValueRef, i));
+                        NSDictionary *dictionary = (__bridge_transfer NSDictionary *)(ABMultiValueCopyValueAtIndex(multiValueRef, i));
                         if(dictionary != NULL){
                             for (NSString *key in [dictionary allKeys]) {
                                 [[multiValue dictionaryValue] setObject:[dictionary valueForKey:key] forKey:key];
@@ -221,12 +214,12 @@
 
 -(ABMMultiValue *)birthday{
     if(_birthday == NULL){
-        CFDateRef birthdayRef = ABRecordCopyValue(_record, kABPersonBirthdayProperty);
+        CFDateRef birthdayRef = (CFDateRef)ABRecordCopyValue(_record, kABPersonBirthdayProperty);
         
         if(birthdayRef != NULL){
             _birthday = [[ABMMultiValue alloc] init];
             [_birthday setLabel:@"Birthday"];
-            [_birthday setDateValue:(__bridge NSDate *)(birthdayRef)];
+            [_birthday setDateValue:(__bridge_transfer NSDate *)(birthdayRef)];
         }
         
     }

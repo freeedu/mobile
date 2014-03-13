@@ -14,14 +14,12 @@
 		9326599618CE34A700452156 /* main.m in Sources */ = {isa = PBXBuildFile; fileRef = 9326599518CE34A700452156 /* main.m */; };
 		9326599A18CE34A700452156 /* ABAppDelegate.m in Sources */ = {isa = PBXBuildFile; fileRef = 9326599918CE34A700452156 /* ABAppDelegate.m */; };
 		9326599D18CE34A700452156 /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 9326599B18CE34A700452156 /* Main.storyboard */; };
-		932659A018CE34A700452156 /* ABMasterViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 9326599F18CE34A700452156 /* ABMasterViewController.m */; };
-		932659A318CE34A700452156 /* ABDetailViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 932659A218CE34A700452156 /* ABDetailViewController.m */; };
 		932659A518CE34A700452156 /* Images.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 932659A418CE34A700452156 /* Images.xcassets */; };
 		932659AC18CE34A700452156 /* XCTest.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 932659AB18CE34A700452156 /* XCTest.framework */; };
 		932659AD18CE34A700452156 /* Foundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 9326598918CE34A700452156 /* Foundation.framework */; };
 		932659AE18CE34A700452156 /* UIKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 9326598D18CE34A700452156 /* UIKit.framework */; };
 		932659B618CE34A700452156 /* InfoPlist.strings in Resources */ = {isa = PBXBuildFile; fileRef = 932659B418CE34A700452156 /* InfoPlist.strings */; };
-		932659B818CE34A700452156 /* AddressBook2Tests.m in Sources */ = {isa = PBXBuildFile; fileRef = 932659B718CE34A700452156 /* AddressBook2Tests.m */; };
+		932659B818CE34A700452156 /* ContactToolsTests.m in Sources */ = {isa = PBXBuildFile; fileRef = 932659B718CE34A700452156 /* ContactToolsTests.m */; };
 		932659C618CE35E800452156 /* ABMultiplePeoplePickerController.m in Sources */ = {isa = PBXBuildFile; fileRef = 932659C518CE35E800452156 /* ABMultiplePeoplePickerController.m */; };
 		932659E018CE360600452156 /* ABContactBaseCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 932659C918CE360600452156 /* ABContactBaseCell.m */; };
 		932659E118CE360600452156 /* ABContactBaseViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 932659CB18CE360600452156 /* ABContactBaseViewController.m */; };
@@ -70,16 +68,12 @@
 		9326599818CE34A700452156 /* ABAppDelegate.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = ABAppDelegate.h; sourceTree = "<group>"; };
 		9326599918CE34A700452156 /* ABAppDelegate.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = ABAppDelegate.m; sourceTree = "<group>"; };
 		9326599C18CE34A700452156 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/Main.storyboard; sourceTree = "<group>"; };
-		9326599E18CE34A700452156 /* ABMasterViewController.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = ABMasterViewController.h; sourceTree = "<group>"; };
-		9326599F18CE34A700452156 /* ABMasterViewController.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = ABMasterViewController.m; sourceTree = "<group>"; };
-		932659A118CE34A700452156 /* ABDetailViewController.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = ABDetailViewController.h; sourceTree = "<group>"; };
-		932659A218CE34A700452156 /* ABDetailViewController.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = ABDetailViewController.m; sourceTree = "<group>"; };
 		932659A418CE34A700452156 /* Images.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Images.xcassets; sourceTree = "<group>"; };
 		932659AA18CE34A700452156 /* ContactToolsTests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = ContactToolsTests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
 		932659AB18CE34A700452156 /* XCTest.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = XCTest.framework; path = Library/Frameworks/XCTest.framework; sourceTree = DEVELOPER_DIR; };
 		932659B318CE34A700452156 /* ContactToolsTests-Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = "ContactToolsTests-Info.plist"; sourceTree = "<group>"; };
 		932659B518CE34A700452156 /* en */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = en; path = en.lproj/InfoPlist.strings; sourceTree = "<group>"; };
-		932659B718CE34A700452156 /* AddressBook2Tests.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = AddressBook2Tests.m; sourceTree = "<group>"; };
+		932659B718CE34A700452156 /* ContactToolsTests.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = ContactToolsTests.m; sourceTree = "<group>"; };
 		932659C418CE35E800452156 /* ABMultiplePeoplePickerController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = ABMultiplePeoplePickerController.h; path = Controller/ABMultiplePeoplePickerController.h; sourceTree = "<group>"; };
 		932659C518CE35E800452156 /* ABMultiplePeoplePickerController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = ABMultiplePeoplePickerController.m; path = Controller/ABMultiplePeoplePickerController.m; sourceTree = "<group>"; };
 		932659C818CE360600452156 /* ABContactBaseCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = ABContactBaseCell.h; path = Controller/Contact/ABContactBaseCell.h; sourceTree = "<group>"; };
@@ -189,10 +183,6 @@
 				9326599818CE34A700452156 /* ABAppDelegate.h */,
 				9326599918CE34A700452156 /* ABAppDelegate.m */,
 				9326599B18CE34A700452156 /* Main.storyboard */,
-				9326599E18CE34A700452156 /* ABMasterViewController.h */,
-				9326599F18CE34A700452156 /* ABMasterViewController.m */,
-				932659A118CE34A700452156 /* ABDetailViewController.h */,
-				932659A218CE34A700452156 /* ABDetailViewController.m */,
 				932659A418CE34A700452156 /* Images.xcassets */,
 				9326599018CE34A700452156 /* Supporting Files */,
 			);
@@ -214,7 +204,7 @@
 		932659B118CE34A700452156 /* ContactToolsTests */ = {
 			isa = PBXGroup;
 			children = (
-				932659B718CE34A700452156 /* AddressBook2Tests.m */,
+				932659B718CE34A700452156 /* ContactToolsTests.m */,
 				932659B218CE34A700452156 /* Supporting Files */,
 			);
 			name = ContactToolsTests;
@@ -424,7 +414,6 @@
 				932659E218CE360600452156 /* ABContactBasicInfoCell.m in Sources */,
 				932659E118CE360600452156 /* ABContactBaseViewController.m in Sources */,
 				93265A0618CE367F00452156 /* ABMGroup.m in Sources */,
-				932659A318CE34A700452156 /* ABDetailViewController.m in Sources */,
 				932659E418CE360600452156 /* ABContactMultiValueCell.m in Sources */,
 				932659E718CE360600452156 /* ABContactSelectableCell.m in Sources */,
 				93265A0B18CE3A1700452156 /* ABContactPeopleCell.m in Sources */,
@@ -437,7 +426,6 @@
 				932659E818CE360600452156 /* ABGroupCell.m in Sources */,
 				9326599618CE34A700452156 /* main.m in Sources */,
 				93265A0518CE367F00452156 /* ABMContact.m in Sources */,
-				932659A018CE34A700452156 /* ABMasterViewController.m in Sources */,
 				93265A0818CE367F00452156 /* ABMRecord.m in Sources */,
 				932659EB18CE360600452156 /* ABGroupPickerViewController.m in Sources */,
 				932659E618CE360600452156 /* ABContactPickerViewController.m in Sources */,
@@ -450,7 +438,7 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				932659B818CE34A700452156 /* AddressBook2Tests.m in Sources */,
+				932659B818CE34A700452156 /* ContactToolsTests.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

@@ -83,11 +83,8 @@
 
 -(void)call:(NSString *)receipt {
     if(receipt != NULL && ![receipt isEqualToString:@""]){
-        
-    
         NSLog(@"Start to Call");
-        NSCharacterSet *characterSet = [[NSCharacterSet alloc] init];
-        characterSet = [NSCharacterSet characterSetWithCharactersInString:@"0123456789"];
+        NSCharacterSet *characterSet = [NSCharacterSet characterSetWithCharactersInString:@"0123456789"];
         NSMutableString *mutableString = [NSMutableString new];
     
         for (int i = 0; i < [receipt length]; i++) {

@@ -8,11 +8,11 @@
 
 #import <XCTest/XCTest.h>
 
-@interface AddressBook2Tests : XCTestCase
+@interface ContactToolsTests : XCTestCase
 
 @end
 
-@implementation AddressBook2Tests
+@implementation ContactToolsTests
 
 - (void)setUp
 {

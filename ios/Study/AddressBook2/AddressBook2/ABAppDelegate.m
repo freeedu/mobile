@@ -7,12 +7,14 @@
 //
 
 #import "ABAppDelegate.h"
+#import "ABAddressBookUtils.h"
 
 @implementation ABAppDelegate
 
 - (BOOL)application:(UIApplication *)application didFinishLaunchingWithOptions:(NSDictionary *)launchOptions
 {
-    // Override point for customization after application launch.
+    [ABAddressBookUtils sharedInstance];
+    
     return YES;
 }
 							

@@ -15,17 +15,18 @@
         return nil;
     }
     
-    NSString *value = (__bridge NSString *)(ABRecordCopyValue(_record, key));
+    NSString *value = (__bridge_transfer NSString *)ABRecordCopyValue(_record, key);
+
     return value;
 }
 
--(ABMutableMultiValueRef) multiValueForAddressBookKey:(ABRecordID) key{
+-(ABMultiValueRef) multiValueForAddressBookKey:(ABRecordID) key{
     if (!_record){
         return nil;
     }
     
-    ABMutableMultiValueRef multiValueRef = ABRecordCopyValue(_record, key);
-    return multiValueRef;
+    ABMultiValueRef multiValueRef = (ABMultiValueRef)ABRecordCopyValue(_record, key);
+    return  multiValueRef;
 }
 
 

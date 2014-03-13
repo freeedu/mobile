@@ -33,11 +33,11 @@
 -(NSArray *) readPeopleInGroups: (NSArray *) groups;
 -(NSArray *) readAllPeople;
 -(NSArray *) readAllGroup;
--(BOOL) checkExistGroupWithName:(NSString *) groupName;
+-(bool) checkExistGroupWithName:(NSString *) groupName;
 -(ABMGroup *) createGroupWithName:(NSString *) groupName;
--(BOOL) deleteGroup:(ABMGroup *) group;
--(BOOL) addMembers:(NSArray *) members toGroup:(ABMGroup *) group;
--(BOOL) removeMember:(ABMContact *) member fromGroup:(ABMGroup *) group;
--(BOOL) removeContact:(ABMContact *) contact;
+-(bool) deleteGroup:(ABMGroup *) group;
+-(bool) addMembers:(NSArray *) members toGroup:(ABMGroup *) group;
+-(bool) removeMember:(ABMContact *) member fromGroup:(ABMGroup *) group;
+-(bool) removeContact:(ABMContact *) contact;
 
 @end

@@ -87,8 +87,8 @@ static ABAddressBookUtils *sharedInstance = nil;
     return result;
 }
 
-- (BOOL) setPersonImage:(ABRecordRef) person inAddressBook:(ABAddressBookRef) paramAddressBook withImageData:(NSData *) imageData {
-    BOOL result = NO;
+- (bool) setPersonImage:(ABRecordRef) person inAddressBook:(ABAddressBookRef) paramAddressBook withImageData:(NSData *) imageData {
+    bool result = NO;
     
     if(paramAddressBook == NULL || person == NULL){
         NSLog(@"Invalid paramters for set person image.");
@@ -96,22 +96,22 @@ static ABAddressBookUtils *sharedInstance = nil;
     }
     
     CFErrorRef couldSetPersonImageError = NULL;
-    BOOL couldSetPersonImage = ABPersonSetImageData(person, (__bridge CFDataRef)(imageData), &couldSetPersonImageError);
+    bool couldSetPersonImage = ABPersonSetImageData(person, (__bridge CFDataRef)(imageData), &couldSetPersonImageError);
     
     if(couldSetPersonImage){
         NSLog(@"Successfully set the person's image.");
         if(ABAddressBookHasUnsavedChanges(paramAddressBook)){
-            BOOL couldSaveAddressBook = NO;
             CFErrorRef couldSaveAddressBookError = NULL;
             
-            couldSaveAddressBook = ABAddressBookSave(paramAddressBook, &couldSaveAddressBookError);
+            bool couldSaveAddressBook = ABAddressBookSave(paramAddressBook, &couldSaveAddressBookError);
             
-            if(couldSetPersonImage){
+            if(couldSaveAddressBook){
                 NSLog(@"Successfully saved the address book.");
                 result = YES;
             } else{
                 NSLog(@"Failed to save the address book.");
             }
+            
         } else {
             NSLog(@"There is no change to be saved.");
         }
@@ -143,7 +143,7 @@ static ABAddressBookUtils *sharedInstance = nil;
 
 
 //API for using
-//-(BOOL)existGroupWithName:(NSString *)groupName {
+//-(bool)existGroupWithName:(NSString *)groupName {
 //    if(_addressBook != NULL){
 //        return [self doesGroupExistWithGroupName:groupName inAddressBook:_addressBook];
 //    }
@@ -151,7 +151,7 @@ static ABAddressBookUtils *sharedInstance = nil;
 //    return NO;
 //}
 //
-//-(BOOL)createGroup:(NSString *)groupName {
+//-(bool)createGroup:(NSString *)groupName {
 //    if(_addressBook){
 //        if([self doesGroupExistWithGroupName:groupName inAddressBook:_addressBook]){
 //            return NO;
@@ -164,7 +164,7 @@ static ABAddressBookUtils *sharedInstance = nil;
 //    return NO;
 //}
 //
-//-(BOOL)deleteGroupWithName:(NSString *)groupName {
+//-(bool)deleteGroupWithName:(NSString *)groupName {
 //    if(_addressBook){
 //        return [self removeGroupWithName:groupName inAddressBook:_addressBook];
 //    }
@@ -191,7 +191,7 @@ static ABAddressBookUtils *sharedInstance = nil;
 //    return nil;
 //}
 //
-//-(BOOL)addPerson:(ABRecordID)recordId toGroup:(NSString *)groupName {
+//-(bool)addPerson:(ABRecordID)recordId toGroup:(NSString *)groupName {
 //    if(_addressBook){
 //        ABRecordRef person = [self findPersonWithRecordId:recordId inAddressBook:_addressBook];
 //        ABRecordRef group = [self findGroupWithName:groupName inAddressBook:_addressBook];
@@ -297,8 +297,8 @@ static ABAddressBookUtils *sharedInstance = nil;
     return result;
 }
 
--(BOOL)checkExistGroupWithName:(NSString *)groupName inAddressBook:(ABAddressBookRef) paramAddressBook {
-    BOOL result = YES;
+-(bool)checkExistGroupWithName:(NSString *)groupName inAddressBook:(ABAddressBookRef) paramAddressBook {
+    bool result = YES;
     
     if(groupName == NULL || paramAddressBook == NULL){
         NSLog(@"Invalid parameters for check group exist or not.");
@@ -328,7 +328,7 @@ static ABAddressBookUtils *sharedInstance = nil;
 }
 
 -(ABMGroup *)createGroupWithName:(NSString *)groupName inAddressBook:(ABAddressBookRef) paramAddressBook{
-    ABMGroup *result;
+    ABMGroup *result = NULL;
     
     if(groupName == NULL || paramAddressBook == NULL){
         NSLog(@"Invalid parameters for create group.");
@@ -341,12 +341,11 @@ static ABAddressBookUtils *sharedInstance = nil;
         return result;
     }
     
-    BOOL couldSetGroupName = NO;
     CFErrorRef error = NULL;
     
-    couldSetGroupName = ABRecordSetValue(group, kABGroupNameProperty, (__bridge CFTypeRef)(groupName), &error);
+    bool couldSetGroupName = ABRecordSetValue(group, kABGroupNameProperty, (__bridge_retained CFTypeRef)(groupName), &error);
     if(couldSetGroupName) {
-        BOOL couldAddRecord = NO;
+        bool couldAddRecord = NO;
         CFErrorRef addRecordError = NULL;
         
         couldAddRecord = ABAddressBookAddRecord(paramAddressBook, group, &addRecordError);
@@ -354,30 +353,25 @@ static ABAddressBookUtils *sharedInstance = nil;
         if(couldAddRecord) {
             NSLog(@"Successfully added the new group.");
             if(ABAddressBookHasUnsavedChanges(paramAddressBook)) {
-                BOOL couldSaveAddressBook = NO;
                 CFErrorRef couldSaveAddressBookError = NULL;
                 
-                couldSaveAddressBook = ABAddressBookSave(paramAddressBook, &couldSaveAddressBookError);
+                bool couldSaveAddressBook = ABAddressBookSave(paramAddressBook, &couldSaveAddressBookError);
                 
                 if(couldSaveAddressBook) {
                     NSLog(@"Successfully saved the address book.");
                 } else {
-                    CFRelease(group);
                     group = NULL;
                     NSLog(@"Failed to save the address book.");
                 }
             } else {
-                CFRelease(group);
                 group = NULL;
                 NSLog(@"No unsaved changes");
             }
         } else {
-            CFRelease(group);
             group = NULL;
             NSLog(@"Could not add a new group.");
         }
     } else {
-        CFRelease(group);
         group = NULL;
         NSLog(@"Failed to set the name of the group.");
     }
@@ -389,15 +383,15 @@ static ABAddressBookUtils *sharedInstance = nil;
     return result;
 }
 
--(BOOL) deleteGroup:(ABMGroup *) groupToDelete inAddressBook:(ABAddressBookRef) paramAddressBook {
-    BOOL result = NO;
+-(bool) deleteGroup:(ABMGroup *) groupToDelete inAddressBook:(ABAddressBookRef) paramAddressBook {
+    bool result = NO;
     
     if(groupToDelete == NULL || paramAddressBook == NULL){
         NSLog(@"Invalid parameters for create group.");
         return  result;
     }
     
-    BOOL canRemoveGroup = NO;
+    bool canRemoveGroup = NO;
     CFErrorRef canRemoveGroupError = NULL;
     
     ABRecordRef group = [groupToDelete record];
@@ -415,7 +409,7 @@ static ABAddressBookUtils *sharedInstance = nil;
     if(canRemoveGroup) {
         NSLog(@"Successfully Removed the group.");
         if(ABAddressBookHasUnsavedChanges(paramAddressBook)) {
-            BOOL couldSaveAddressBook = NO;
+            bool couldSaveAddressBook = NO;
             CFErrorRef couldSaveAddressBookError = NULL;
             
             couldSaveAddressBook = ABAddressBookSave(paramAddressBook, &couldSaveAddressBookError);
@@ -424,17 +418,14 @@ static ABAddressBookUtils *sharedInstance = nil;
                 NSLog(@"Successfully saved the address book.");
                 result = YES;
             } else {
-                CFRelease(group);
                 group = NULL;
                 NSLog(@"Failed to save the address book.");
             }
         } else {
-            CFRelease(group);
             group = NULL;
             NSLog(@"No unsaved changes");
         }
     } else {
-        CFRelease(group);
         group = NULL;
         NSLog(@"Could not remove group.");
     }
@@ -446,8 +437,8 @@ static ABAddressBookUtils *sharedInstance = nil;
     return result;
 }
 
--(BOOL)addMembers:(NSArray *)membersToAdd toGroup:(ABMGroup *)groupToAdd inAddressBook:(ABAddressBookRef) paramAddressBook {
-    BOOL result = NO;
+-(bool)addMembers:(NSArray *)membersToAdd toGroup:(ABMGroup *)groupToAdd inAddressBook:(ABAddressBookRef) paramAddressBook {
+    bool result = NO;
     
     if(membersToAdd == NULL || groupToAdd == NULL || paramAddressBook == NULL){
         NSLog(@"Invalid parameters for add member to group.");
@@ -473,7 +464,7 @@ static ABAddressBookUtils *sharedInstance = nil;
         CFRelease(members);
         
         for (ABMContact *contact in membersToAdd) {
-            BOOL contain = NO;
+            bool contain = NO;
             for (ABMContact *c in groupMembers) {
                 if([c recordId] == [contact recordId]){
                     contain = YES;
@@ -488,7 +479,7 @@ static ABAddressBookUtils *sharedInstance = nil;
     }
     
     CFErrorRef error = NULL;
-    BOOL addResult;
+    bool addResult;
     
     for (ABMContact *contact in newAddMembers) {
         addResult = ABGroupAddMember(group, [contact record], &error);
@@ -498,7 +489,7 @@ static ABAddressBookUtils *sharedInstance = nil;
     }
     
     if(ABAddressBookHasUnsavedChanges(paramAddressBook)){
-        BOOL couldSaveAddressBook = NO;
+        bool couldSaveAddressBook = NO;
         CFErrorRef couldSaveAddressBookError = NULL;
         
         couldSaveAddressBook = ABAddressBookSave(paramAddressBook, &couldSaveAddressBookError);
@@ -514,15 +505,15 @@ static ABAddressBookUtils *sharedInstance = nil;
     return result;
 }
 
--(BOOL)removeMember:(ABMContact *)memberToRemove fromGroup:(ABMGroup *)groupToRemove inAddressBook:(ABAddressBookRef) paramAddressBook {
-    BOOL result = NO;
+-(bool)removeMember:(ABMContact *)memberToRemove fromGroup:(ABMGroup *)groupToRemove inAddressBook:(ABAddressBookRef) paramAddressBook {
+    bool result = NO;
     
     if(memberToRemove == NULL || groupToRemove == NULL || paramAddressBook == NULL){
         NSLog(@"Invalid parameters for remove member from group.");
         return  result;
     }
     
-    BOOL canRemoveMember = NO;
+    bool canRemoveMember = NO;
     CFErrorRef canRemoveMemberError = NULL;
     
     ABRecordRef group = [groupToRemove record];
@@ -533,7 +524,7 @@ static ABAddressBookUtils *sharedInstance = nil;
     if(canRemoveMember) {
         NSLog(@"Successfully Removed the member from group.");
         if(ABAddressBookHasUnsavedChanges(paramAddressBook)) {
-            BOOL couldSaveAddressBook = NO;
+            bool couldSaveAddressBook = NO;
             CFErrorRef couldSaveAddressBookError = NULL;
             
             couldSaveAddressBook = ABAddressBookSave(paramAddressBook, &couldSaveAddressBookError);
@@ -542,17 +533,14 @@ static ABAddressBookUtils *sharedInstance = nil;
                 NSLog(@"Successfully saved the address book.");
                 result = YES;
             } else {
-                CFRelease(group);
                 group = NULL;
                 NSLog(@"Failed to save the address book.");
             }
         } else {
-            CFRelease(group);
             group = NULL;
             NSLog(@"No unsaved changes");
         }
     } else {
-        CFRelease(group);
         group = NULL;
         NSLog(@"Could not remove group.");
     }
@@ -564,15 +552,15 @@ static ABAddressBookUtils *sharedInstance = nil;
     return result;
 }
 
--(BOOL)removeContact:(ABMContact *)contact inAddressBook:(ABAddressBookRef) paramAddressBook{
-    BOOL result = NO;
+-(bool)removeContact:(ABMContact *)contact inAddressBook:(ABAddressBookRef) paramAddressBook{
+    bool result = NO;
     
     if(contact == NULL || paramAddressBook == NULL){
         NSLog(@"Invalid parameter for remove contact.");
         return result;
     }
     
-    BOOL canRemoveContact = NO;
+    bool canRemoveContact = NO;
     CFErrorRef canRemoveContactError = NULL;
     
     ABRecordRef contactToDel = [contact record];
@@ -582,7 +570,7 @@ static ABAddressBookUtils *sharedInstance = nil;
     if(canRemoveContact){
         NSLog(@"Successfully Removed the contact.");
         if(ABAddressBookHasUnsavedChanges(paramAddressBook)) {
-            BOOL couldSaveAddressBook = NO;
+            bool couldSaveAddressBook = NO;
             CFErrorRef couldSaveAddressBookError = NULL;
         
             couldSaveAddressBook = ABAddressBookSave(paramAddressBook, &couldSaveAddressBookError);
@@ -591,17 +579,14 @@ static ABAddressBookUtils *sharedInstance = nil;
                 NSLog(@"Successfully saved the address book.");
                 result = YES;
             } else {
-                CFRelease(contactToDel);
                 contactToDel = NULL;
                 NSLog(@"Failed to save the address book.");
             }
         } else {
-            CFRelease(contactToDel);
             contactToDel = NULL;
             NSLog(@"No unsaved changes");
         }
     } else {
-        CFRelease(contactToDel);
         contactToDel = NULL;
         NSLog(@"Could not remove contact.");
     }
@@ -662,7 +647,7 @@ static ABAddressBookUtils *sharedInstance = nil;
     return nil;
 }
 
--(BOOL)checkExistGroupWithName:(NSString *)groupName{
+-(bool)checkExistGroupWithName:(NSString *)groupName{
     if(_addressBook){
         return [self checkExistGroupWithName:groupName inAddressBook:_addressBook];
     }
@@ -677,14 +662,14 @@ static ABAddressBookUtils *sharedInstance = nil;
     return nil;
 }
 
--(BOOL)deleteGroup:(ABMGroup *)group {
+-(bool)deleteGroup:(ABMGroup *)group {
     if(_addressBook){
         return [self deleteGroup:group inAddressBook:_addressBook];
     }
     return NO;
 }
 
--(BOOL)addMembers:(NSArray *)members toGroup:(ABMGroup *)group {
+-(bool)addMembers:(NSArray *)members toGroup:(ABMGroup *)group {
     if(_addressBook){
         return [self addMembers:members toGroup:group inAddressBook:_addressBook];
     }
@@ -692,14 +677,14 @@ static ABAddressBookUtils *sharedInstance = nil;
     return NO;
 }
 
--(BOOL)removeMember:(ABMContact *)member fromGroup:(ABMGroup *)group{
+-(bool)removeMember:(ABMContact *)member fromGroup:(ABMGroup *)group{
     if(_addressBook){
         return [self removeMember:member fromGroup:group inAddressBook:_addressBook];
     }
     return NO;
 }
 
--(BOOL)removeContact:(ABMContact *)contact {
+-(bool)removeContact:(ABMContact *)contact {
     if(_addressBook){
         return [self removeContact:contact inAddressBook:_addressBook];
     }
